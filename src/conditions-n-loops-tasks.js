@@ -122,8 +122,35 @@ function isIsoscelesTriangle(a, b, c) {
  *  10  => X
  *  26  => XXVI
  */
-function convertToRomanNumerals(/* num */) {
-  throw new Error('Not implemented');
+function convertToRomanNumerals(num) {
+  const romanOne = 'I';
+  const romanFive = 'V';
+  const romanTen = 'X';
+  let result = '';
+  if (num >= 10) {
+    for (let index = 0; index < Math.trunc(num / 10); index += 1) {
+      result += romanTen;
+    }
+  }
+  const other = num % 10;
+  if (other < 4) {
+    for (let index = 0; index < other; index += 1) {
+      result += romanOne;
+    }
+  }
+  if (other === 4) {
+    result += romanOne + romanFive;
+  }
+  if (other >= 5 && other <= 8) {
+    result += romanFive;
+    for (let index = 0; index < other - 5; index += 1) {
+      result += romanOne;
+    }
+  }
+  if (other === 9) {
+    result += romanOne + romanTen;
+  }
+  return result;
 }
 
 /**
@@ -141,8 +168,57 @@ function convertToRomanNumerals(/* num */) {
  *  '10,5'    => 'one zero point five'
  *  '1950.2'  => 'one nine five zero point two'
  */
-function convertNumberToString(/* numberStr */) {
-  throw new Error('Not implemented');
+function convertNumberToString(numberStr) {
+  let wordNumberStr = '';
+  for (let index = 0; index < numberStr.length; index += 1) {
+    switch (numberStr[index]) {
+      case '-':
+        wordNumberStr += 'minus';
+        break;
+      case '.':
+        wordNumberStr += 'point';
+        break;
+      case ',':
+        wordNumberStr += 'point';
+        break;
+      case '0':
+        wordNumberStr += 'zero';
+        break;
+      case '1':
+        wordNumberStr += 'one';
+        break;
+      case '2':
+        wordNumberStr += 'two';
+        break;
+      case '3':
+        wordNumberStr += 'three';
+        break;
+      case '4':
+        wordNumberStr += 'four';
+        break;
+      case '5':
+        wordNumberStr += 'five';
+        break;
+      case '6':
+        wordNumberStr += 'six';
+        break;
+      case '7':
+        wordNumberStr += 'seven';
+        break;
+      case '8':
+        wordNumberStr += 'eight';
+        break;
+      case '9':
+        wordNumberStr += 'nine';
+        break;
+      default:
+        break;
+    }
+    if (index < numberStr.length - 1) {
+      wordNumberStr += ' ';
+    }
+  }
+  return wordNumberStr;
 }
 
 /**
